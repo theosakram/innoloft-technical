@@ -22,7 +22,7 @@ export const OfferDetails = (props: OfferDetailsProps) => {
           </div>
 
           <div className="flex gap-4">
-            {props.bussinessModel.map((tech, i) => (
+            {props.technology.map((tech, i) => (
               <span
                 key={i}
                 className="rounded-md bg-slate-300 p-1 text-sm text-gray-500"

@@ -12,6 +12,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'bit.ly',
       },
+      {
+        protocol: 'https',
+        hostname: 'img.innoloft.com',
+      },
     ],
   },
   rewrites: async () => {

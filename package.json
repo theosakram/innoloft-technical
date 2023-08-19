@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "dompurify": "^3.0.5",
     "draft-js": "^0.11.7",
+    "google-map-react": "^2.2.1",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -24,6 +26,8 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
+    "@types/dompurify": "^3.0.2",
+    "@types/google-map-react": "^2.1.7",
     "@types/node": "^20.5.1",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",

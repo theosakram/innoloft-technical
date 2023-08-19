@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useGetProduct } from '@/modules/product/productHooks';
 import { matchLI } from '@/shared/match';
 import { Breadcrumbs } from '@/uikit/components/Breadcrumbs';
+import { OfferCard, OfferCardProps } from '@/uikit/components/OfferCard';
 import { OfferDetails } from '@/uikit/components/OfferDetail';
 
 const ProductPage = () => {
@@ -13,6 +14,51 @@ const ProductPage = () => {
     { id: 6781 },
     { onError: console.log },
   );
+
+  const processedData = useMemo((): OfferCardProps => {
+    if (data) {
+      return {
+        description: data.description,
+        imageUrl: data.picture,
+        title: data.name,
+        offeredBy: {
+          logo: data.company.logo,
+          profile: {
+            company: data.company.name,
+            name: `${data.user.firstName} ${data.user.lastName}`,
+            src: data.user.profilePicture,
+          },
+          location: {
+            street: `${data.company.address.street} ${data.company.address.house},`,
+            city: `${data.company.address.zipCode} ${data.company.address.city.name}, ${data.company.address.country.name}`,
+            coords: {
+              lat: +data.company.address.latitude,
+              lng: +data.company.address.longitude,
+            },
+          },
+        },
+      };
+    }
+
+    return {
+      description: '',
+      imageUrl: '',
+      offeredBy: {
+        location: {
+          street: '',
+          city: '',
+          coords: undefined,
+        },
+        logo: '',
+        profile: {
+          company: '',
+          name: '',
+          src: '',
+        },
+      },
+      title: '',
+    };
+  }, [data]);
 
   const matchState = useMemo(() => {
     if (isLoading) {
@@ -31,7 +77,7 @@ const ProductPage = () => {
   }, [data, isLoading, isError]);
 
   return (
-    <main>
+    <main className="overflow-auto">
       <div className="flex">
         <Breadcrumbs />
         <div className="flex-grow" />
@@ -48,6 +94,8 @@ const ProductPage = () => {
         loading: () => <h1>Loading . . . .</h1>,
         data: () => (
           <div className="flex flex-col gap-4">
+            <OfferCard {...processedData} />
+
             <div className="border-brand-border flex flex-col gap-6 rounded-md border bg-white p-6">
               <b>Video</b>
               <div className="flex justify-center">
@@ -58,7 +106,10 @@ const ProductPage = () => {
             <OfferDetails
               bussinessModel={data?.businessModels.map((mod) => mod.name) || []}
               costs={[data?.investmentEffort || '']}
-              technology={[]}
+              technology={[
+                data?.type.name || '',
+                ...(data?.categories.map((datum) => datum.name) || []),
+              ]}
               trl={[data?.trl.name || '']}
             />
           </div>

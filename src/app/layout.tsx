@@ -30,7 +30,7 @@ export default function RootLayout(props: PropsWithChildren) {
   return (
     <QueryProvider>
       <html lang="en">
-        <body className="h-full overflow-hidden bg-slate-200">
+        <body className="h-full bg-slate-200">
           <Header src="https://bit.ly/dan-abramov" />
 
           <main className="flex w-full justify-center">
