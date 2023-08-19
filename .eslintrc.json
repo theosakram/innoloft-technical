@@ -19,7 +19,6 @@
         "@typescript-eslint/consistent-type-exports": 1,
         "@typescript-eslint/consistent-type-imports": 1,
         "eqeqeq": ["error", "always"],
-        "import/no-duplicates": ["error", { "considerQueryString": true }]
       }
     }
   ]

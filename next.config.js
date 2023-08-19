@@ -1,5 +1,11 @@
+const defaultURL = 'https://api-test.innoloft.com';
+const baseSource = '/api-innoloft';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  publicRuntimeConfig: {
+    baseSource,
+  },
   images: {
     remotePatterns: [
       {
@@ -7,6 +13,14 @@ const nextConfig = {
         hostname: 'bit.ly',
       },
     ],
+  },
+  rewrites: async () => {
+    return [
+      {
+        source: `${baseSource}/:path*`,
+        destination: `${defaultURL}/:path*`,
+      },
+    ];
   },
 };
 
