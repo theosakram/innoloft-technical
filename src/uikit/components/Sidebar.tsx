@@ -18,7 +18,7 @@ export type SidebarProps = {
 
 export const Sidebar = (props: SidebarProps) => {
   return (
-    <aside className="flex flex-col gap-3">
+    <aside className="flex flex-col gap-4">
       {props.withProfile && <Profile {...props.withProfile} />}
 
       {props.menu.map((item, i) => (

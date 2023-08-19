@@ -21,14 +21,14 @@ export const Header = (props: HeaderProps) => {
           placeholder="Enter interests, keyword, company name, etc."
         />
 
-        <div className="flex items-center gap-6 self-stretch text-white">
+        <div className="flex items-center justify-end gap-6 text-white">
           <BsChatDots />
           <div className="flex items-center gap-2">
             <label htmlFor="cars">EN</label>
             <BsChevronDown />
           </div>
           <BsBell />
-          <div className="items-center flex h-8 w-8 gap-2 overflow-hidden rounded-full">
+          <div className="flex h-8 w-8 items-center gap-2 overflow-hidden rounded-full">
             <Image
               alt="header-profile"
               src={props.src}
