@@ -33,9 +33,9 @@ export default function RootLayout(props: PropsWithChildren) {
         <body className="h-full bg-slate-200">
           <Header src="https://bit.ly/dan-abramov" />
 
-          <main className="flex w-full justify-center">
-            <div className="flex w-4/5 gap-6 p-4">
-              <div className="w-1/5">
+          <main className="flex w-full md:justify-center">
+            <div className="flex w-full gap-6 p-2 md:w-4/5 md:p-4">
+              <div className="hidden w-1/5 md:block">
                 <Sidebar
                   menu={sidebarMenu}
                   withProfile={{
@@ -46,7 +46,7 @@ export default function RootLayout(props: PropsWithChildren) {
                 />
               </div>
 
-              <div className="w-4/5">{props.children}</div>
+              <div className="w-full md:w-4/5">{props.children}</div>
             </div>
           </main>
         </body>

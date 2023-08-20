@@ -78,9 +78,9 @@ const ProductPage = () => {
 
   return (
     <main className="overflow-auto">
-      <div className="flex">
+      <div className="mb-4 flex flex-col gap-1 md:mb-0 md:flex-row">
         <Breadcrumbs />
-        <div className="flex-grow" />
+        <div className="hidden md:flex-grow" />
         <Link href="/product/edit" passHref>
           <button className="h-7 rounded-md bg-brand-blue px-2 text-sm text-white">
             Edit
@@ -93,7 +93,7 @@ const ProductPage = () => {
         idle: () => <h1>No Activity</h1>,
         loading: () => <h1>Loading . . . .</h1>,
         data: () => (
-          <div className="flex flex-col gap-4">
+          <div className="flex w-full flex-col gap-4">
             <OfferCard {...processedData} />
 
             <div className="flex flex-col gap-6 rounded-md border border-brand-border bg-white p-6">

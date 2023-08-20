@@ -23,8 +23,8 @@ export type OfferCardProps = {
 
 export const OfferCard = (props: OfferCardProps) => {
   return (
-    <div className=" flex rounded-md bg-white">
-      <div className="border-brand-border flex w-8/12 flex-col gap-5 border p-6">
+    <div className="flex flex-col rounded-md bg-white md:flex-row">
+      <div className="flex flex-col gap-5 border-brand-border p-6 md:w-8/12 md:border">
         <Image
           alt="patent-image"
           src={props.imageUrl}
@@ -39,7 +39,7 @@ export const OfferCard = (props: OfferCardProps) => {
         />
       </div>
 
-      <div className="flex w-4/12 flex-col gap-4 border border-l-0 p-6">
+      <div className="flex w-full flex-col gap-4 border-l-0 p-6 md:w-4/12 md:border">
         <b>Offered By</b>
 
         <Image

@@ -8,20 +8,21 @@ export type HeaderProps = {
 export const Header = (props: HeaderProps) => {
   return (
     <div className="flex w-full items-center justify-center bg-brand-blue p-4">
-      <div className="grid h-full w-4/5 grid-cols-4 gap-10">
-        <Image
-          alt="brand-logo"
-          src="/brandLogoWhite.svg"
-          width={150}
-          height={300}
-        />
+      <div className="grid h-full grid-cols-4 gap-10 md:w-4/5">
+        <div className="w-40">
+          <img
+            src="/brandLogoWhite.svg"
+            alt="brand-logo"
+            className="object-cover"
+          />
+        </div>
         <input
           type="text"
-          className="col-span-2 h-7 w-96 rounded-sm p-2 text-sm placeholder:text-black"
+          className="col-span-2 hidden h-7 w-96 rounded-sm p-2 text-sm placeholder:text-black md:block"
           placeholder="Enter interests, keyword, company name, etc."
         />
 
-        <div className="flex items-center justify-end gap-6 text-white">
+        <div className="hidden items-center justify-end gap-6 text-white md:flex">
           <BsChatDots />
           <div className="flex items-center gap-2">
             <label htmlFor="cars">EN</label>
