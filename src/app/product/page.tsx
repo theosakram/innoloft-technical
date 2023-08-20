@@ -3,62 +3,14 @@
 import { useMemo } from 'react';
 import ReactPlayer from 'react-player';
 import Link from 'next/link';
-import { useGetProduct } from '@/modules/product/productHooks';
+import { useProductStore } from '@/modules/product/productStore';
 import { matchLI } from '@/shared/match';
 import { Breadcrumbs } from '@/uikit/components/Breadcrumbs';
-import { OfferCard, OfferCardProps } from '@/uikit/components/OfferCard';
+import { OfferCard } from '@/uikit/components/OfferCard';
 import { OfferDetails } from '@/uikit/components/OfferDetail';
 
 const ProductPage = () => {
-  const { data, isLoading, isError } = useGetProduct(
-    { id: 6781 },
-    { onError: console.log },
-  );
-
-  const processedData = useMemo((): OfferCardProps => {
-    if (data) {
-      return {
-        description: data.description,
-        imageUrl: data.picture,
-        title: data.name,
-        offeredBy: {
-          logo: data.company.logo,
-          profile: {
-            company: data.company.name,
-            name: `${data.user.firstName} ${data.user.lastName}`,
-            src: data.user.profilePicture,
-          },
-          location: {
-            street: `${data.company.address.street} ${data.company.address.house},`,
-            city: `${data.company.address.zipCode} ${data.company.address.city.name}, ${data.company.address.country.name}`,
-            coords: {
-              lat: +data.company.address.latitude,
-              lng: +data.company.address.longitude,
-            },
-          },
-        },
-      };
-    }
-
-    return {
-      description: '',
-      imageUrl: '',
-      offeredBy: {
-        location: {
-          street: '',
-          city: '',
-          coords: undefined,
-        },
-        logo: '',
-        profile: {
-          company: '',
-          name: '',
-          src: '',
-        },
-      },
-      title: '',
-    };
-  }, [data]);
+  const { data, isLoading, isError, offerCardData } = useProductStore();
 
   const matchState = useMemo(() => {
     if (isLoading) {
@@ -80,7 +32,7 @@ const ProductPage = () => {
     <main className="overflow-auto">
       <div className="mb-4 flex flex-col gap-1 md:mb-0 md:flex-row">
         <Breadcrumbs />
-        <div className="hidden md:flex-grow" />
+        <div className="flex-grow" />
         <Link href="/product/edit" passHref>
           <button className="h-7 rounded-md bg-brand-blue px-2 text-sm text-white">
             Edit
@@ -89,12 +41,12 @@ const ProductPage = () => {
       </div>
 
       {matchLI(matchState)({
-        error: () => <h1>Something is wrong</h1>,
+        error: () => <h1>Error: Something is wrong</h1>,
         idle: () => <h1>No Activity</h1>,
         loading: () => <h1>Loading . . . .</h1>,
         data: () => (
           <div className="flex w-full flex-col gap-4">
-            <OfferCard {...processedData} />
+            <OfferCard {...offerCardData} />
 
             <div className="flex flex-col gap-6 rounded-md border border-brand-border bg-white p-6">
               <b>Video</b>

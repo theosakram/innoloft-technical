@@ -30,6 +30,12 @@ export default function RootLayout(props: PropsWithChildren) {
   return (
     <QueryProvider>
       <html lang="en">
+        <head>
+          <script
+            src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"
+            referrerPolicy="origin"
+          />
+        </head>
         <body className="h-full bg-slate-200">
           <Header src="https://bit.ly/dan-abramov" />
 

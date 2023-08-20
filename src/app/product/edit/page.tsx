@@ -1,19 +1,36 @@
 'use client';
 
-import { useState } from 'react';
-import { Editor } from 'react-draft-wysiwyg';
-import { EditorState } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { useForm } from 'react-hook-form';
+import Select from 'react-select';
+import { useProductStore } from '@/modules/product/productStore';
+import { OfferCard } from '@/uikit/components/OfferCard';
 
 const ProductEditPage = () => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty(),
-  );
+  const { offerCardData, data } = useProductStore();
 
   return (
-    <div>
-      <h1>Product Edit</h1>
-      <Editor editorState={editorState} onEditorStateChange={setEditorState} />
+    <div className="flex flex-col gap-2">
+      <strong>{data?.name}</strong>
+      <OfferCard {...offerCardData} variant="edit" />
+
+      <div className="flex flex-col gap-4 rounded-md bg-white p-4">
+        <strong>Video</strong>
+        <input
+          type="text"
+          placeholder="Add a youtube or vimeo link"
+          className="rounded-md border border-slate-300 p-1 text-sm"
+        />
+      </div>
+
+      <div className="flex flex-col gap-4 rounded-md bg-white p-4">
+        <strong>Offer Details</strong>
+        <input
+          type="text"
+          placeholder="Add a youtube or vimeo link"
+          className="rounded-md border border-slate-300 p-1 text-sm"
+        />
+      </div>
     </div>
   );
 };

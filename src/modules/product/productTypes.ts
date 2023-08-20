@@ -1,23 +1,3 @@
-export type GetProductRequest = {
-  id: number;
-};
-
-export type ProductResponse = {
-  id: number;
-  name: string;
-  description: string;
-  picture: string;
-  type: Type;
-  categories: Array<Category>;
-  implementationEffortText: any;
-  investmentEffort: string;
-  trl: Trl;
-  video: string;
-  user: User;
-  company: Company;
-  businessModels: Array<BusinessModel>;
-};
-
 export type Type = {
   id: number;
   name: string;
@@ -70,4 +50,28 @@ export type City = {
 export type BusinessModel = {
   id: number;
   name: string;
+};
+
+export type GetProductRequest = {
+  id: number;
+};
+
+export type ProductResponse = {
+  id: number;
+  name: string;
+  description: string;
+  picture: string;
+  type: Type;
+  categories: Array<Category>;
+  implementationEffortText: any;
+  investmentEffort: string;
+  trl: Trl;
+  video: string;
+  user: User;
+  company: Company;
+  businessModels: Array<BusinessModel>;
+};
+
+export type UpdateProductRequest = GetProductRequest & {
+  body: unknown;
 };
