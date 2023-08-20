@@ -96,7 +96,7 @@ const ProductPage = () => {
           <div className="flex flex-col gap-4">
             <OfferCard {...processedData} />
 
-            <div className="border-brand-border flex flex-col gap-6 rounded-md border bg-white p-6">
+            <div className="flex flex-col gap-6 rounded-md border border-brand-border bg-white p-6">
               <b>Video</b>
               <div className="flex justify-center">
                 <ReactPlayer url={data?.video} controls />
