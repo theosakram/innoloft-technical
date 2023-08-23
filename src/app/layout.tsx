@@ -22,7 +22,7 @@ const sidebarMenu: Array<SidebarItem> = [
   {
     icon: <MdOutlineProductionQuantityLimits />,
     label: 'Product',
-    href: '/product',
+    href: '/product/6781',
   },
 ];
 

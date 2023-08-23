@@ -1,8 +1,12 @@
-import type { UseQueryOptions } from 'react-query';
-import { useQuery } from 'react-query';
+import type { UseMutationOptions, UseQueryOptions } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { queryKeys } from '@/shared/constant';
-import { getProduct } from './productServices';
-import type { GetProductRequest, ProductResponse } from './productTypes';
+import { getProduct, updateProduct } from './productServices';
+import type {
+  GetProductRequest,
+  ProductResponse,
+  UpdateProductRequest,
+} from './productTypes';
 
 export const useGetProduct = (
   payload: GetProductRequest,
@@ -16,6 +20,16 @@ export const useGetProduct = (
   return useQuery(
     [queryKeys.getProduct, payload],
     () => getProduct(payload),
+    options,
+  );
+};
+
+export const useUpdateProduct = (
+  options?: UseMutationOptions<unknown, unknown, UpdateProductRequest>,
+) => {
+  return useMutation(
+    [queryKeys.updateProduct],
+    (payload: UpdateProductRequest) => updateProduct(payload),
     options,
   );
 };

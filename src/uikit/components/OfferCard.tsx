@@ -1,18 +1,19 @@
 import { Editor } from '@tinymce/tinymce-react';
 import GoogleMapReact, { Coords } from 'google-map-react';
+import { useMemo, useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import { IconContext } from 'react-icons';
 import { CiLocationOn } from 'react-icons/ci';
+import { IoMdCheckmark } from 'react-icons/io';
 import { MdLocationPin } from 'react-icons/md';
 import Image from 'next/image';
-import { matchLI } from '@/shared/match';
+import { UpdateProductRequest } from '@/modules/product/productTypes';
+import { ADT, matchPI } from '@/shared/match';
 import DOMPurify from 'dompurify';
 import { Profile, ProfileProps } from './Profile';
-import 'react-quill/dist/quill.snow.css';
-import { useRef } from 'react';
+import { Spinner } from './Spinner';
 
-type Variant = 'view' | 'edit';
-
-export type OfferCardProps = {
+type BaseProps = {
   title: string;
   description: string;
   imageUrl: string;
@@ -25,11 +26,26 @@ export type OfferCardProps = {
       coords?: Coords;
     };
   };
-  variant?: Variant;
+  id: number;
 };
 
-export const OfferCard = ({ variant = 'view', ...props }: OfferCardProps) => {
+export type OfferCardProps = ADT<{
+  view: BaseProps;
+  edit: BaseProps & {
+    onCancel: () => void;
+    onSave: (data: UpdateProductRequest) => void;
+    isLoading?: boolean;
+  };
+}>;
+export const OfferCard = (props: OfferCardProps) => {
   const editorRef = useRef<any>(null);
+  const { register, handleSubmit } = useForm<UpdateProductRequest['body']>({
+    defaultValues: useMemo(() => {
+      return {
+        title: props.title,
+      };
+    }, [props]),
+  });
 
   return (
     <div className="flex flex-col rounded-md bg-white md:flex-row">
@@ -40,7 +56,7 @@ export const OfferCard = ({ variant = 'view', ...props }: OfferCardProps) => {
           width={300}
           height={100}
         />
-        {matchLI(variant)({
+        {matchPI(props)({
           view: () => (
             <>
               <b>{props.title}</b>
@@ -51,12 +67,21 @@ export const OfferCard = ({ variant = 'view', ...props }: OfferCardProps) => {
               />
             </>
           ),
-          edit: () => (
-            <>
+          edit: ({ onCancel, onSave, id, isLoading }) => (
+            <form
+              style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+              onSubmit={handleSubmit((e) => {
+                return onSave({
+                  id,
+                  body: e,
+                });
+              })}
+            >
               <input
                 type="text"
                 defaultValue={props.title}
                 className="rounded-md border border-slate-300 p-1"
+                {...register('title')}
               />
               <Editor
                 onInit={(_, editor) => (editorRef.current = editor)}
@@ -76,8 +101,27 @@ export const OfferCard = ({ variant = 'view', ...props }: OfferCardProps) => {
                     'removeformat | help',
                 }}
               />
-            </>
+
+              <div className="flex justify-end gap-6">
+                <button type="button" onClick={onCancel}>
+                  Cancel
+                </button>
+
+                <button
+                  className="flex items-center gap-2 rounded-md bg-purple-500 px-2 py-1 text-white"
+                  type="submit"
+                >
+                  {isLoading ? (
+                    <Spinner />
+                  ) : (
+                    <IoMdCheckmark style={{ color: 'white' }} />
+                  )}
+                  Save
+                </button>
+              </div>
+            </form>
           ),
+          _: () => null,
         })}
       </div>
 
@@ -102,7 +146,7 @@ export const OfferCard = ({ variant = 'view', ...props }: OfferCardProps) => {
           </div>
         </div>
 
-        {matchLI(variant)({
+        {matchPI(props)({
           view: () => (
             <div className="h-60">
               <GoogleMapReact
@@ -122,7 +166,7 @@ export const OfferCard = ({ variant = 'view', ...props }: OfferCardProps) => {
               </GoogleMapReact>
             </div>
           ),
-          edit: () => null,
+          _: () => null,
         })}
       </div>
     </div>

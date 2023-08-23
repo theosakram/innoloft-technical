@@ -1,5 +1,6 @@
 import { BsBell, BsChatDots, BsChevronDown } from 'react-icons/bs';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export type HeaderProps = {
   src: string;
@@ -9,13 +10,15 @@ export const Header = (props: HeaderProps) => {
   return (
     <div className="flex w-full items-center justify-center bg-brand-blue p-4">
       <div className="grid h-full grid-cols-4 gap-10 md:w-4/5">
-        <div className="w-40">
-          <img
-            src="/brandLogoWhite.svg"
-            alt="brand-logo"
-            className="object-cover"
-          />
-        </div>
+        <Link href="/">
+          <div className="w-40">
+            <img
+              src="/brandLogoWhite.svg"
+              alt="brand-logo"
+              className="object-cover"
+            />
+          </div>
+        </Link>
         <input
           type="text"
           className="col-span-2 hidden h-7 w-96 rounded-sm p-2 text-sm placeholder:text-black md:block"

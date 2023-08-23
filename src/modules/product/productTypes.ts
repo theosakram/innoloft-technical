@@ -73,5 +73,8 @@ export type ProductResponse = {
 };
 
 export type UpdateProductRequest = GetProductRequest & {
-  body: unknown;
+  body: {
+    title?: string;
+    description?: string;
+  };
 };

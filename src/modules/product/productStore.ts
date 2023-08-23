@@ -32,6 +32,8 @@ export const useProductStore = () => {
             },
           },
         },
+        id: data.id,
+        _tag: 'view',
       };
     }
 
@@ -52,6 +54,8 @@ export const useProductStore = () => {
         },
       },
       title: '',
+      id: 0,
+      _tag: 'view',
     };
   }, [data]);
 

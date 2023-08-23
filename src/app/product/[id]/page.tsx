@@ -33,7 +33,7 @@ const ProductPage = () => {
       <div className="mb-4 flex flex-col gap-1 md:mb-0 md:flex-row">
         <Breadcrumbs />
         <div className="flex-grow" />
-        <Link href="/product/edit" passHref>
+        <Link href="/product/6781/edit" passHref>
           <button className="h-7 rounded-md bg-brand-blue px-2 text-sm text-white">
             Edit
           </button>
