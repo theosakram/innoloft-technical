@@ -1,13 +1,15 @@
 
 # Usage
 
-First, clone the repo, then install the dependencies
+1. Clone the repo
+2. Rename .env.local.example -> .env.local
+3. Install dependencies
 
 ```bash
 yarn
 ```
 
-Then run it
+4. Run it
 
 ```bash
 yarn dev

@@ -2,8 +2,11 @@
 
 import { useMemo } from 'react';
 import ReactPlayer from 'react-player';
+import getConfig from 'next/config';
 import Link from 'next/link';
+import { useGetAppConfig } from '@/modules/appConfig/appConfigHooks';
 import { useProductStore } from '@/modules/product/productStore';
+import { getEnv } from '@/shared/getEnv';
 import { matchLI } from '@/shared/match';
 import { Breadcrumbs } from '@/uikit/components/Breadcrumbs';
 import { OfferCard } from '@/uikit/components/OfferCard';
